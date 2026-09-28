@@ -1,13 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portfolio</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aimar · Martínez · Calzado</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <img src="src/images/" alt="">
+      <p>AMC</p>
+    </div>
+    <nav class="topbar">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about-me">About me</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="toggle-theme-container">
+      <button>SUN</button>
+    </div>
+  </header>
+
+  <main>
+    <section id="home">
+      <div class="left-section">
+        <div class="home-content">
+          <h1>Aimar <br>Martínez Calzado</h1>
+          <h2>Desarrollador Web</h2>
+          <p>Soy un apasionado de las tecnologias, especialmente de la tecnologia web, diseño, implementación y
+            lanzamiento.</p>
+          <div class="extra-info">
+            <ul class="badge-list">
+              <li><span></span>Disponible para trabajar</li>
+              <li><span></span>08214, Badia del Vallès</li>
+            </ul>
+            <div class="button-group">
+              <a href="#contact">Hablemos</a>
+              <button>Descargar CV</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="right-section">
+        <div class="image-target">
+          <img src="" alt="">
+        </div>
+      </div>
+    </section>
+    <section id="about-me">
+      <div class="left-section">
+        <div class="about-me-content">
+          <span class="section-label">01 — SOBRE MÍ</span>
+
+          <p class="description">
+            Soy Aimar Martínez Calzado, desarrollador web con interés por construir
+            interfaces útiles, accesibles y agradables de utilizar.
+          </p>
+
+          <p class="description-secondary">
+            Entiendo el portfolio como un espacio vivo: una oportunidad para seguir
+            refinando ideas, experimentar con buenas prácticas y convertir nuevos
+            conocimientos en experiencias digitales cada vez más cuidadas.
+          </p>
+        </div>
+      </div>
+
+      <div class="right-section">
+        <div class="skills">
+          <div class="skills-group">
+            <h2>Habilidades</h2>
+            <ol>
+              <li><span>01</span>HTML</li>
+              <li><span>02</span>CSS</li>
+              <li><span>03</span>JavaScript</li>
+              <li><span>04</span>TypeScript</li>
+            </ol>
+          </div>
+
+          <div class="skills-divider"></div>
+
+          <div class="skills-group-learning">
+            <h3>Mejorando conocimientos</h3>
+            <ul>
+              <li>React</li>
+              <li>Java</li>
+              <li>GIT</li>
+              <li>SQL</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="blog"></section>
+    <section id="contact"></section>
+  </main>
+</body>
+
 </html>
