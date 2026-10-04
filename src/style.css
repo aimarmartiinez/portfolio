@@ -6,6 +6,7 @@
   --text-secondary-color: #6e6e73;
 
   --border-color: #e5e5e7;
+  --border-radius:16px;
 
   --accent: #0071e3;
   --accent-bg: rgba(0, 113, 227, 0.08);
@@ -372,4 +373,56 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+form > input, select,textarea ,button{
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--accent-border);
+}
+
+form > input:focus, select:focus, textarea:focus, button:focus{
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+form > input::placeholder{
+  color: var(--text-secondary-color);
+}
+
+form > select > option {
+  background-color: var(--bg);
+  color: var(--text-color);
+}
+form > select > option:hover {
+  background-color: var(--accent-bg);
+  color: var(--text-color);
+}
+form > select > option:checked {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+form > textarea {
+  min-height: 150px;
+  resize: none;
+}
+
+form > textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+form > button {
+  background-color: var(--accent);
+  color: var(--bg);
+}
+
+form > button:hover {
+  background-color: var(--accent-bg);
+  transform: translateY(-1px);
+  color: var(--text-color);
 }
