@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
@@ -16,10 +16,10 @@
     </div>
     <nav class="topbar">
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about-me">About me</a></li>
+        <li><a href="#home">Inicio</a></li>
+        <li><a href="#about-me">Sobre mí</a></li>
         <li><a href="#blog">Blog</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Contacto</a></li>
       </ul>
     </nav>
     <div class="toggle-theme-container">
@@ -32,9 +32,11 @@
       <div class="left-section">
         <div class="content">
           <h1>Aimar <br>Martínez Calzado</h1>
-          <h2>Desarrollador Web</h2>
-          <p>Soy un apasionado de las tecnologias, especialmente de la tecnologia web, diseño, implementación y
-            lanzamiento.</p>
+          <p class="subtitle">Desarrollador web</p>
+          <p class="description">
+            Me apasiona la tecnología web y participar en todo el proceso de creación:
+            desde el diseño y la implementación hasta el lanzamiento.
+          </p>
           <div class="extra-info">
             <ul class="badge-list">
               <li><span></span>Disponible para trabajar</li>
@@ -57,16 +59,14 @@
       <div class="left-section">
         <div class="content">
           <span class="section-label">01 — SOBRE MÍ</span>
-
+          <h2>Diseño y desarrollo con atención al detalle</h2>
           <p class="description">
-            Soy Aimar Martínez Calzado, desarrollador web con interés por construir
-            interfaces útiles, accesibles y agradables de utilizar.
+            Soy desarrollador web y me interesa crear interfaces útiles, accesibles
+            y agradables de utilizar.
           </p>
-
           <p class="description-secondary">
-            Entiendo el portfolio como un espacio vivo: una oportunidad para seguir
-            refinando ideas, experimentar con buenas prácticas y convertir nuevos
-            conocimientos en experiencias digitales cada vez más cuidadas.
+            Veo cada proyecto como una oportunidad para experimentar, aplicar buenas
+            prácticas y convertir nuevos conocimientos en experiencias digitales cuidadas.
           </p>
         </div>
       </div>
@@ -74,7 +74,7 @@
       <div class="right-section">
         <div class="skills content">
           <div class="skills-group">
-            <h2>Habilidades</h2>
+            <h3>Habilidades</h3>
             <ol>
               <li><span>01</span>HTML</li>
               <li><span>02</span>CSS</li>
@@ -86,7 +86,7 @@
           <div class="skills-divider"></div>
 
           <div class="skills-group-learning">
-            <h3>Mejorando conocimientos</h3>
+            <h4>En aprendizaje</h4>
             <ul>
               <li>React</li>
               <li>Java</li>
@@ -100,8 +100,12 @@
 
     <section id="blog">
       <div class="content">
-        <span class="section-label">02 — Blog</span>
-        <h1>¡Mira aqui las mejoras del porfolio y mi progreso como desarrollador web!</h1>
+        <span class="section-label">02 — BLOG</span>
+        <h2>Proyectos, aprendizajes e ideas</h2>
+        <p class="description-secondary">
+          En este espacio compartiré experiencias, aprendizajes y reflexiones sobre
+          desarrollo web, junto con las mejoras que vaya haciendo en este portfolio.
+        </p>
         <div class="carousel">
           <div class="article-item"></div>
           <div class="article-item"></div>
@@ -122,27 +126,40 @@
       <div class="left-section">
         <div class="content">
           <span class="section-label">03 — CONTACTO</span>
-          <h1>Información de contacto</h1>
-          <ul>
-            <li><strong>Correo: </strong><a
-                href="mailto:martinezcalzadoaimar+portfolio@gmail.com">martinezcalzadoaimar@gmail.com</a></li>
-            <li><strong>Telefono: </strong>+34 601763567</li>
-            <li><strong>Linkedln: </strong><a href="">Aimar-Martinez-Calzado</a></li>
+          <h2>¿Hablamos de tu próximo proyecto?</h2>
+          <p class="description-secondary">
+            Estoy abierto a nuevas oportunidades y colaboraciones. Escríbeme para
+            contarme tu propuesta o los detalles del proyecto.
+          </p>
+          <ul class="contact-list">
+            <li>
+              <strong>Correo</strong>
+              <a href="mailto:martinezcalzadoaimar+portfolio@gmail.com">martinezcalzadoaimar@gmail.com</a>
+            </li>
+            <li>
+              <strong>Teléfono</strong>
+              <a href="tel:+34601763567">+34 601 76 35 67</a>
+            </li>
           </ul>
         </div>
       </div>
       <div class="right-section">
         <div class="content">
           <form action="" method="post">
-            <h2>Formulario</h2>
-            <input type="text" placeholder="nombre">
-            <input type="email" name="email" id="email" placeholder="correo@gmail.com">
-            <select name="assumpt" id="assumpt">
-              <option value="work">Oportunidad Laboral</option>
-              <option value="project">Unete a mi proyecto</option>
+            <h3>Envíame un mensaje</h3>
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name" placeholder="Tu nombre" autocomplete="name" required>
+            <label for="email">Correo electrónico</label>
+            <input type="email" name="email" id="email" placeholder="tu@correo.com" autocomplete="email" required>
+            <label for="assumpt">Motivo del mensaje</label>
+            <select name="assumpt" id="assumpt" required>
+              <option value="" selected disabled>Selecciona un motivo</option>
+              <option value="work">Oportunidad laboral</option>
+              <option value="project">Colaboración en un proyecto</option>
               <option value="other">Otro</option>
             </select>
-            <textarea name="message" id="message"></textarea>
+            <label for="message">Mensaje</label>
+            <textarea name="message" id="message" placeholder="Cuéntame en qué puedo ayudarte" required></textarea>
             <button type="submit">Enviar</button>
           </form>
         </div>

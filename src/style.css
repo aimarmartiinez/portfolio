@@ -395,53 +395,98 @@ form {
   align-items: center;
 }
 
-form > input, select,textarea ,button{
+#contact .content > form {
+  gap: 1rem;
+}
+
+#contact form h3 {
+  font-size: 1.4rem;
+}
+
+#contact .contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+#contact .contact-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+#contact .contact-list strong {
+  color: var(--text-secondary-color);
+  font-size: 0.8rem;
+}
+
+#contact .contact-list a {
+  overflow-wrap: anywhere;
+}
+
+#contact form label {
+  color: var(--text-secondary-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+#contact form > input,
+#contact form > select,
+#contact form > textarea,
+#contact form > button {
   width: 100%;
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius);
   border: 1px solid var(--accent-border);
+  color: var(--text-color);
+  font: inherit;
 }
 
-form > input:focus, select:focus, textarea:focus, button:focus{
+#contact form > input,
+#contact form > select,
+#contact form > textarea {
+  background-color: var(--bg);
+}
+
+#contact form > input:focus,
+#contact form > select:focus,
+#contact form > textarea:focus,
+#contact form > button:focus-visible {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
-form > input::placeholder{
+#contact form > input::placeholder,
+#contact form > textarea::placeholder {
   color: var(--text-secondary-color);
 }
 
-form > select > option {
+#contact form > select > option {
   background-color: var(--bg);
   color: var(--text-color);
 }
-form > select > option:hover {
-  background-color: var(--accent-bg);
-  color: var(--text-color);
-}
-form > select > option:checked {
-  background-color: var(--accent);
-  color: var(--bg);
-}
 
-form > textarea {
+#contact form > textarea {
   min-height: 150px;
   resize: none;
 }
 
-form > textarea:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
-}
-
-form > button {
+#contact form > button {
   background-color: var(--accent);
   color: var(--bg);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
-form > button:hover {
+#contact form > button:hover {
   background-color: var(--accent-bg);
   transform: translateY(-1px);
   color: var(--text-color);
