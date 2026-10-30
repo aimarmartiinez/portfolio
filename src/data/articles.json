@@ -1,0 +1,52 @@
+[
+  {
+    "category": "Backend · Laravel",
+    "title": "De buscar pista a confirmar reserva: PadelHub",
+    "lead": "Una reserva parece un formulario, pero detrás hay disponibilidad, permisos y relaciones entre varias piezas del sistema.",
+    "paragraphs": [
+      "En PadelHub trabajé con Laravel en un flujo para consultar pistas, elegir una franja horaria y gestionar las reservas desde la cuenta del usuario. La aplicación relaciona usuarios, clubes, pistas y reservas, de modo que cada reserva pertenece a una pista y a quien la realiza.",
+      "También aprendí a separar responsabilidades: las rutas protegidas limitan el acceso según el rol y las políticas determinan qué acciones puede hacer cada persona. El panel de Filament facilita la gestión de clubes y reservas. La lección principal fue pensar las reglas del negocio antes de construir las pantallas."
+    ],
+    "tags": ["Laravel", "PHP", "Filament", "MySQL"]
+  },
+  {
+    "category": "Datos · Node.js",
+    "title": "De una API pública a un dashboard de e-commerce",
+    "lead": "Para que un gráfico cuente algo útil, primero hay que entender de dónde salen sus datos y cómo se transforman.",
+    "paragraphs": [
+      "En este proyecto sincronizo productos y usuarios desde Fake Store API y preparo esos datos para mostrarlos en un dashboard. Express expone rutas propias para consultar usuarios, productos y estadísticas, mientras que EJS renderiza la página y Chart.js convierte las métricas en gráficos.",
+      "Separar la sincronización, los endpoints y el cálculo de estadísticas hizo más fácil seguir el recorrido de la información. También me permitió practicar cómo una API externa puede alimentar una aplicación con una API propia. Aprendí que un dashboard no empieza en el gráfico: empieza en un flujo de datos claro y consistente."
+    ],
+    "tags": ["Node.js", "Express", "EJS", "Chart.js"]
+  },
+  {
+    "category": "Frontend · Vue",
+    "title": "Una agenda de contactos que va más allá del CRUD",
+    "lead": "Crear, editar y borrar datos es solo el comienzo: una aplicación útil también ayuda a encontrarlos y organizarlos.",
+    "paragraphs": [
+      "Contact App reúne contactos, grupos, favoritos, historial y estadísticas en una SPA hecha con Vue 3 y TypeScript. Vue Router organiza las vistas, y una API simulada con json-server permite practicar la comunicación entre el frontend y el backend.",
+      "Usé la Composition API para mantener el estado y los valores derivados cerca de cada vista, además de componentes reutilizables para elementos como la ficha del contacto. La validación del teléfono en formato internacional y la detección de duplicados muestran cómo las reglas de datos también forman parte de la experiencia de usuario, no solo del formulario."
+    ],
+    "tags": ["Vue 3", "TypeScript", "Vue Router", "json-server"]
+  },
+  {
+    "category": "Backend · Express",
+    "title": "Validar en el servidor también mejora la experiencia",
+    "lead": "Un formulario claro no basta: el servidor debe comprobar los datos y ayudar a corregirlos cuando algo no encaja.",
+    "paragraphs": [
+      "En mi aplicación de contacto con Express y EJS, el servidor comprueba que el nombre y los apellidos contengan letras, que el teléfono tenga nueve dígitos y que la descripción no supere los 250 caracteres. Así, las reglas importantes no dependen únicamente de lo que ocurra en el navegador.",
+      "Cuando hay errores, la aplicación vuelve a mostrar el formulario con mensajes y conserva los valores introducidos; responde con estado 422 para indicar que los datos no son válidos. Practiqué así el renderizado en servidor con EJS y entendí que una buena validación debe explicar el problema sin obligar a empezar de nuevo."
+    ],
+    "tags": ["Node.js", "Express", "EJS", "Validación"]
+  },
+  {
+    "category": "Diseño · Portfolio",
+    "title": "Un portfolio para dar contexto a lo que he aprendido",
+    "lead": "Los ejercicios muestran código; un portfolio ayuda a explicar qué problema resuelve cada proyecto y qué aprendí al hacerlo.",
+    "paragraphs": [
+      "Durante el ciclo reuní trabajos de distintos módulos en un portfolio personal organizado por áreas. La navegación por módulos y componentes como la barra de navegación, la presentación y el apartado «Sobre mí» hacen que el recorrido sea más fácil de seguir que una carpeta llena de entregas.",
+      "Este trabajo me hizo pensar en cómo presentar un proyecto además de programarlo: qué contexto necesita quien lo visita, cómo ordenar el contenido y qué detalles de interfaz ayudan a orientarse. También convirtió el propio ciclo en una historia visible, que puedo ampliar a medida que sumo nuevos proyectos y experiencias."
+    ],
+    "tags": ["React", "TypeScript", "React Router", "UI/UX"]
+  }
+]
