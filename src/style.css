@@ -186,6 +186,12 @@ header>.toggle-theme-container>button {
     transform 0.2s ease;
 }
 
+header>.toggle-theme-container>button>img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
 header>.toggle-theme-container>button:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow);
@@ -476,6 +482,35 @@ form {
   font-size: 0.75rem;
 }
 
+.article-github-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--border-radius-xxl);
+  background: var(--accent);
+  color: var(--bg);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.article-github-link:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.article-github-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 @media (max-width: 900px) {
   .article-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -517,8 +552,9 @@ form {
   font-size: 0.8rem;
 }
 
-#contact .contact-list a {
+#contact .contact-value {
   overflow-wrap: anywhere;
+  user-select: text;
 }
 
 #contact form label {

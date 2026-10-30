@@ -2,6 +2,7 @@ import articlesData from "./data/articles.json";
 
 interface Article {
   category: string;
+  githubUrl: string;
   title: string;
   lead: string;
   paragraphs: string[];
@@ -60,6 +61,15 @@ function renderArticle(article: Article, index: number): HTMLElement {
   }
 
   card.append(tags);
+
+  const githubLink = document.createElement("a");
+  githubLink.className = "article-github-link";
+  githubLink.href = article.githubUrl;
+  githubLink.target = "_blank";
+  githubLink.rel = "noopener noreferrer";
+  githubLink.textContent = "Ver proyecto en GitHub";
+  card.append(githubLink);
+
   return card;
 }
 
