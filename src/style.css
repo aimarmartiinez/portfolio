@@ -198,7 +198,6 @@ header>.toggle-theme-container>button:hover {
   background: var(--bg);
 }
 
-#home,
 #about-me,
 #contact {
   display: grid;
@@ -230,6 +229,50 @@ header>.toggle-theme-container>button:hover {
   height: auto;
   text-align: left;
 }
+#home > .content {
+  width: 100%;
+  max-width: 48rem;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#home .content > * {
+  animation: home-fade-up 0.7s ease-out both;
+}
+
+#home .content > :nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+#home .content > :nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+#home .content > :nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+#home .content > h1 {
+  font-size: clamp(2.5rem, 7vw, 4.5rem);
+  line-height: 1.05;
+}
+
+#home .description {
+  max-width: 42rem;
+}
+
+@keyframes home-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 #blog > .content {
   width: 100%;
@@ -248,13 +291,16 @@ header>.toggle-theme-container>button:hover {
 
 .extra-info {
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-direction: column;
   gap: 1rem;
 }
 
 .badge-list {
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.5rem;
 }
 
@@ -274,6 +320,7 @@ header>.toggle-theme-container>button:hover {
 .button-group {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -282,6 +329,13 @@ header>.toggle-theme-container>button:hover {
   padding: 0.25rem 1rem;
   border-radius: var(--border-radius);
   border: 1px solid var(--accent-border);
+}
+
+#home .button-group > * {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .button-group>a {
@@ -293,18 +347,6 @@ header>.toggle-theme-container>button:hover {
   background-color: var(--accent-bg);
   transform: translateY(-1px);
   color: var(--text-color);
-}
-
-#home > .right-section> .content>img {
-  display: block;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: auto;
-  background: var(--accent-bg);
-  border-radius: var(--border-radius-xxl);
-  border: 1px solid var(--accent-border);
-  object-fit: cover;
 }
 
 .section-label,
@@ -619,4 +661,14 @@ form {
   background-color: var(--accent-bg);
   transform: translateY(-1px);
   color: var(--text-color);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #home .content > * {
+    animation: none;
+  }
+
+  #home .button-group > * {
+    transition: none;
+  }
 }
