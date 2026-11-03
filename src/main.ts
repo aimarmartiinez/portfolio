@@ -1,5 +1,53 @@
 import articlesData from "./data/articles.json";
 
+const themeButton = document.querySelector<HTMLButtonElement>(".toggle-theme-container button");
+
+if (!themeButton) {
+  throw new Error("No se encontró el botón para cambiar el tema.");
+}
+
+const themeIcon = themeButton.querySelector<HTMLImageElement>("img");
+
+if (!themeIcon) {
+  throw new Error("No se encontró el icono del tema.");
+}
+
+const toggleButton = themeButton;
+const toggleIcon = themeIcon;
+const sunIcon = new URL("./icons/sunny_24px.svg", import.meta.url).href;
+const moonIcon = new URL("./icons/dark_mode_24px.svg", import.meta.url).href;
+
+let isDarkTheme = localStorage.getItem("portfolio-theme") === "dark";
+
+function applyTheme(): void {
+  const label = isDarkTheme ? "Cambiar a tema claro" : "Cambiar a tema oscuro";
+
+  document.documentElement.dataset.theme = isDarkTheme ? "dark" : "light";
+  toggleButton.setAttribute("aria-pressed", String(isDarkTheme));
+  toggleButton.setAttribute("aria-label", label);
+  toggleButton.title = label;
+  toggleIcon.src = isDarkTheme ? moonIcon : sunIcon;
+}
+
+applyTheme();
+
+toggleButton.addEventListener("click", () => {
+  isDarkTheme = !isDarkTheme;
+  localStorage.setItem("portfolio-theme", isDarkTheme ? "dark" : "light");
+  applyTheme();
+});
+
+const contactForm = document.querySelector<HTMLFormElement>("#contact form");
+
+if (!contactForm) {
+  throw new Error('No se encontró el formulario de contacto "#contact form".');
+}
+
+contactForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  window.alert("Estoy trabajando en ello. El envío del formulario estará disponible próximamente.");
+});
+
 interface Article {
   category: string;
   githubUrl: string;
