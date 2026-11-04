@@ -16,6 +16,9 @@
   --accent: #0071e3;
   --accent-bg: rgba(0, 113, 227, 0.08);
   --accent-border: rgba(0, 113, 227, 0.25);
+  --success: #4cd964;
+  --danger: #ff3b30;
+  --pin-shadow: rgba(0, 0, 0, 0.3);
 
   --header-height: 80px;
   --header-top: 1rem;
@@ -23,8 +26,8 @@
   --page-gutter: clamp(1.25rem, 3vw, 2rem);
 
   --shadow:
-    0 4px 12px rgba(0, 0, 0, 0.04),
-    0 12px 32px rgba(0, 0, 0, 0.06);
+    0 2px 8px rgba(0, 0, 0, 0.045),
+    0 1px 2px rgba(0, 0, 0, 0.025);
 
   --sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --heading: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -47,6 +50,10 @@
   --accent: #4da3ff;
   --accent-bg: rgba(77, 163, 255, 0.14);
   --accent-border: rgba(77, 163, 255, 0.4);
+  --pin-shadow: rgba(255, 255, 255, 0.55);
+  --shadow:
+    0 3px 12px rgba(0, 0, 0, 0.28),
+    0 1px 2px rgba(255, 255, 255, 0.035);
 }
 
 *,
@@ -108,7 +115,10 @@ header {
   top: var(--header-top);
   left: 50%;
   transform: translateX(-50%);
-  width: min(calc(100% - 2rem), var(--page-max));
+  width: min(
+    calc(100% - var(--page-gutter) - var(--page-gutter)),
+    calc(var(--page-max) - var(--page-gutter) - var(--page-gutter))
+  );
   z-index: 100;
   display: flex;
   align-items: center;
@@ -117,13 +127,14 @@ header {
   backdrop-filter: blur(18px) saturate(1.2);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   height: var(--header-height);
-  padding-inline: clamp(1rem, 3vw, 2rem);
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
   border: 1px solid var(--surface-border);
   border-radius: var(--border-radius);
-  box-shadow: 0 8px 28px rgba(29, 29, 31, 0.07);
+  box-shadow: var(--shadow);
   transition:
     background-color 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 header>.logo>p {
@@ -210,7 +221,6 @@ header>.toggle-theme-container>button {
   border: 1px solid var(--border-color);
   transition:
     background-color 0.2s ease,
-    box-shadow 0.2s ease,
     transform 0.2s ease;
 }
 
@@ -223,7 +233,6 @@ header>.toggle-theme-container>button>img {
 
 header>.toggle-theme-container>button:hover {
   transform: translateY(-1px);
-  box-shadow: var(--shadow);
   background: var(--bg);
 }
 
@@ -268,6 +277,51 @@ header>.toggle-theme-container>button:hover>img {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+#home {
+  position: relative;
+  min-height: calc(100svh - var(--header-height) - var(--header-top) - 1rem);
+}
+
+.scroll-cue {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  display: flex;
+  justify-content: center;
+  width: 1.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--accent);
+  border-radius: var(--border-radius-xxl);
+  transform: translateX(-50%);
+}
+
+.scroll-cue span {
+  width: 0.25rem;
+  height: 0.45rem;
+  margin-top: 0.4rem;
+  border-radius: var(--border-radius-xxl);
+  background: var(--accent);
+  animation: scroll-cue 1.4s ease-in-out infinite;
+}
+
+.scroll-cue:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@keyframes scroll-cue {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0.65rem);
+  }
 }
 
 #home .content > * {
@@ -348,10 +402,31 @@ header>.toggle-theme-container>button:hover>img {
   border-radius: var(--border-radius);
 
   color: var(--text-secondary-color);
+  box-shadow: var(--shadow);
   transition:
     background-color 0.25s ease,
     border-color 0.25s ease,
-    color 0.25s ease;
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.badge-list>li>span {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.5rem;
+  border-radius: var(--border-radius-xxl);
+  filter: drop-shadow(0 1px 2px var(--pin-shadow));
+}
+.badge-list>li>span.open-to-work {
+  background: var(--success);
+}
+.badge-list>li>.pin-location {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  flex: 0 0 auto;
+  fill: var(--danger);
+  filter: drop-shadow(0 1px 2px var(--pin-shadow));
 }
 
 .button-group {
@@ -361,26 +436,26 @@ header>.toggle-theme-container>button:hover>img {
   gap: 1rem;
 }
 
-.button-group>* {
+#home .button-group > * {
   width: fit-content;
   padding: 0.25rem 1rem;
   border-radius: var(--border-radius);
   border: 1px solid var(--accent-border);
-}
-
-#home .button-group > * {
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
     transform 0.2s ease;
 }
 
-.button-group>a {
+#home .button-group > a {
   background-color: var(--accent);
   color: var(--bg);
 }
-
-.button-group>*:hover {
+#home .button-group > a:nth-child(2) {
+  background: none;
+  color: var(--text-color);
+}
+#home .button-group > *:hover {
   background-color: var(--accent-bg);
   transform: translateY(-1px);
   color: var(--text-color);
@@ -423,7 +498,6 @@ form {
   background: var(--panel-background);
   border: 1px solid var(--panel-border);
   border-radius: var(--border-radius);
-
   box-shadow: var(--shadow);
 
   backdrop-filter: blur(18px);
@@ -431,7 +505,8 @@ form {
   transition:
     background-color 0.25s ease,
     border-color 0.25s ease,
-    color 0.25s ease;
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .skills-group ol {
@@ -455,7 +530,6 @@ form {
 
 .skills-group ol li:hover {
   background: var(--bg);
-  box-shadow: var(--shadow);
 }
 
 .skills-group ol li span {
@@ -520,10 +594,12 @@ form {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   text-align: justify;
+  box-shadow: var(--shadow);
   transition:
     background-color 0.25s ease,
     border-color 0.25s ease,
-    color 0.25s ease;
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .article-meta {
@@ -632,10 +708,12 @@ form {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
   transition:
     background-color 0.25s ease,
     border-color 0.25s ease,
-    color 0.25s ease;
+    color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 #contact .contact-list strong {
@@ -678,7 +756,6 @@ form {
 #contact form > button:focus-visible {
   outline: none;
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-bg);
 }
 
 #contact form > input::placeholder,
@@ -714,6 +791,10 @@ form {
 
 @media (prefers-reduced-motion: reduce) {
   #home .content > * {
+    animation: none;
+  }
+
+  .scroll-cue span {
     animation: none;
   }
 
