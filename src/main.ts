@@ -79,6 +79,81 @@ function createTextElement<K extends keyof HTMLElementTagNameMap>(
   return element;
 }
 
+const articleDialog = document.createElement("dialog");
+articleDialog.classList.add("article-dialog");
+
+document.body.appendChild(articleDialog);
+
+function openArticleDialog(article: Article, index: number): void {
+  const header = document.createElement("div");
+  header.classList.add("article-meta");
+
+  const category = document.createElement("span");
+  category.textContent = article.category;
+
+  const number = document.createElement("span");
+  number.textContent = String(index + 1).padStart(2, "0");
+
+  header.append(category, number);
+
+  const title = document.createElement("h2");
+  title.textContent = article.title;
+
+  const lead = document.createElement("p");
+  lead.classList.add("article-lead");
+  lead.textContent = article.lead;
+
+  const content = document.createElement("div");
+  content.classList.add("article-dialog-content");
+
+  content.append(header, title, lead);
+
+  article.paragraphs.forEach((paragraph) => {
+    const p = document.createElement("p");
+    p.textContent = paragraph;
+    content.appendChild(p);
+  });
+
+  const tags = document.createElement("ul");
+  tags.classList.add("article-tags");
+
+  article.tags.forEach((tag) => {
+    const li = document.createElement("li");
+    li.textContent = tag;
+    tags.appendChild(li);
+  });
+
+  content.appendChild(tags);
+
+  const githubLink = document.createElement("a");
+  githubLink.classList.add("article-github-link");
+  githubLink.href = article.githubUrl;
+  githubLink.target = "_blank";
+  githubLink.rel = "noopener noreferrer";
+  githubLink.textContent = "Ver proyecto en GitHub";
+
+  content.appendChild(githubLink);
+
+  const closeButton = document.createElement("button");
+  closeButton.classList.add("article-dialog-close");
+  closeButton.textContent = "×";
+  closeButton.type = "button";
+  closeButton.addEventListener("click", () => {
+    articleDialog.close();
+  });
+
+  content.appendChild(closeButton);
+
+  articleDialog.replaceChildren(content);
+  articleDialog.showModal();
+}
+
+articleDialog.addEventListener("click", (event) => {
+  if (event.target === articleDialog) {
+    articleDialog.close();
+  }
+});
+
 function renderArticle(article: Article, index: number): HTMLElement {
   const card = document.createElement("article");
   card.className = "article-item";
@@ -96,18 +171,10 @@ function renderArticle(article: Article, index: number): HTMLElement {
     createTextElement("p", article.lead, "article-lead"),
   );
 
-  const articleDetails = document.createElement("details");
-  articleDetails.className = "article-details";
-  const detailsSummary = createTextElement("summary", "Leer artículo");
-  const articleBody = document.createElement("div");
-  articleBody.className = "article-body";
-
-  for (const paragraph of article.paragraphs) {
-    articleBody.append(createTextElement("p", paragraph));
-  }
-
-  articleDetails.append(detailsSummary, articleBody);
-  card.append(articleDetails);
+  const readButton = createTextElement("button", "Leer artículo", "article-read-button");
+  readButton.type = "button";
+  readButton.addEventListener("click", () => openArticleDialog(article, index));
+  card.append(readButton);
 
   const tags = document.createElement("ul");
   tags.className = "article-tags";
