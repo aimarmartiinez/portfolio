@@ -122,3 +122,30 @@ function renderArticle(article: Article, index: number): HTMLElement {
 }
 
 articleGrid.replaceChildren(...articles.map(renderArticle));
+
+const projectPreview = document.querySelector<HTMLDetailsElement>(".project-preview");
+
+if (!projectPreview) {
+  throw new Error('No se encontró la vista previa del proyecto ".project-preview".');
+}
+
+const projectPreviewSummary = projectPreview.querySelector("summary");
+const projectPreviewPopup = projectPreview.querySelector<HTMLElement>(".project-preview-popup");
+
+if (!projectPreviewSummary || !projectPreviewPopup) {
+  throw new Error("No se encontró el botón o el contenido de la vista previa de PadelHub.");
+}
+
+const preview = projectPreview;
+const previewSummary = projectPreviewSummary;
+
+previewSummary.addEventListener("click", (event) => {
+  event.preventDefault();
+  preview.open = !preview.open;
+});
+
+document.addEventListener("click", (event) => {
+  if (!(event.target instanceof Node) || !preview.contains(event.target)) {
+    preview.open = false;
+  }
+});
