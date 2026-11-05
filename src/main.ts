@@ -96,9 +96,18 @@ function renderArticle(article: Article, index: number): HTMLElement {
     createTextElement("p", article.lead, "article-lead"),
   );
 
+  const articleDetails = document.createElement("details");
+  articleDetails.className = "article-details";
+  const detailsSummary = createTextElement("summary", "Leer artículo");
+  const articleBody = document.createElement("div");
+  articleBody.className = "article-body";
+
   for (const paragraph of article.paragraphs) {
-    card.append(createTextElement("p", paragraph));
+    articleBody.append(createTextElement("p", paragraph));
   }
+
+  articleDetails.append(detailsSummary, articleBody);
+  card.append(articleDetails);
 
   const tags = document.createElement("ul");
   tags.className = "article-tags";
@@ -121,7 +130,29 @@ function renderArticle(article: Article, index: number): HTMLElement {
   return card;
 }
 
-articleGrid.replaceChildren(...articles.map(renderArticle));
+const loadMoreButton = document.querySelector<HTMLButtonElement>("#load-more-articles");
+
+if (!articleGrid || !loadMoreButton) {
+  throw new Error("No se encontró el contenedor o el botón para cargar más artículos.");
+}
+
+const articleGridElement = articleGrid;
+const loadMoreArticlesButton = loadMoreButton;
+const pageSize = 6;
+let visibleArticleCount = pageSize;
+
+function renderArticles(): void {
+  const visibleArticles = articles.slice(0, visibleArticleCount);
+
+  articleGridElement.replaceChildren(...visibleArticles.map(renderArticle));
+  loadMoreArticlesButton.hidden = visibleArticleCount >= articles.length;
+}
+
+loadMoreArticlesButton.addEventListener("click", () => {
+  visibleArticleCount += pageSize;
+  renderArticles();
+});
+renderArticles();
 
 const projectPreview = document.querySelector<HTMLDetailsElement>(".project-preview");
 
