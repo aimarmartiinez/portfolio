@@ -112,6 +112,32 @@ const articleVideos: Record<string, string> = {
   "portfolio-DAW": new URL("./videos/portfolio-DAW.mp4", import.meta.url).href,
 };
 
+function loadVideo(video: HTMLVideoElement): void {
+  const source = video.dataset.src;
+
+  if (!source || video.src) {
+    return;
+  }
+
+  video.preload = "metadata";
+  video.src = source;
+  video.load();
+}
+
+const articleVideoObserver = "IntersectionObserver" in window
+  ? new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting && entry.target instanceof HTMLVideoElement) {
+            loadVideo(entry.target);
+            observer.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: "160px 0px" },
+    )
+  : null;
+
 const articles: Article[] = articlesData;
 const articleGrid = document.querySelector<HTMLDivElement>("#article-grid");
 
@@ -235,11 +261,16 @@ function renderArticle(article: Article, index: number): HTMLElement {
 
     const preview = document.createElement("video");
     preview.className = "article-preview";
-    preview.src = videoUrl;
+    preview.dataset.src = videoUrl;
     preview.controls = true;
-    preview.preload = "metadata";
+    preview.preload = "none";
     preview.playsInline = true;
     preview.setAttribute("aria-label", `Previsualización del proyecto ${article.title}`);
+    if (articleVideoObserver) {
+      articleVideoObserver.observe(preview);
+    } else {
+      loadVideo(preview);
+    }
     card.append(preview);
   }
 
@@ -279,11 +310,15 @@ const articleGridElement = articleGrid;
 const loadMoreArticlesButton = loadMoreButton;
 const pageSize = 6;
 let visibleArticleCount = pageSize;
+let renderedArticleCount = 0;
 
 function renderArticles(): void {
-  const visibleArticles = articles.slice(0, visibleArticleCount);
+  const newArticles = articles
+    .slice(renderedArticleCount, visibleArticleCount)
+    .map((article, index) => renderArticle(article, renderedArticleCount + index));
 
-  articleGridElement.replaceChildren(...visibleArticles.map(renderArticle));
+  articleGridElement.append(...newArticles);
+  renderedArticleCount = visibleArticleCount;
   loadMoreArticlesButton.hidden = visibleArticleCount >= articles.length;
 }
 
@@ -307,18 +342,24 @@ if (!projectPreviewSummary || !projectPreviewPopup || !projectPreviewVideo) {
   throw new Error("No se encontró el botón o el contenido de la vista previa de PadelHub.");
 }
 
-projectPreviewVideo.src = articleVideos.padelhub;
-
 const preview = projectPreview;
 const previewSummary = projectPreviewSummary;
 
 previewSummary.addEventListener("click", (event) => {
   event.preventDefault();
   preview.open = !preview.open;
+
+  if (preview.open) {
+    projectPreviewVideo.dataset.src = articleVideos.padelhub;
+    loadVideo(projectPreviewVideo);
+  } else {
+    projectPreviewVideo.pause();
+  }
 });
 
 document.addEventListener("click", (event) => {
   if (!(event.target instanceof Node) || !preview.contains(event.target)) {
     preview.open = false;
+    projectPreviewVideo.pause();
   }
 });
