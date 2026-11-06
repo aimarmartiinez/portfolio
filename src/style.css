@@ -287,6 +287,7 @@ header>.toggle-theme-container>button:hover>img {
 #home {
   position: relative;
   min-height: calc(100svh - var(--header-height) - var(--header-top) - 1rem);
+  min-height: calc(100dvh - var(--header-height) - var(--header-top) - 1rem);
 }
 
 .scroll-cue {
@@ -1098,6 +1099,7 @@ form {
 
   #home {
     min-height: calc(100svh - var(--header-height) - var(--header-top) - 0.75rem);
+    min-height: calc(100dvh - var(--header-height) - var(--header-top) - 0.75rem);
     align-items: center;
     padding-top: 2rem;
     padding-bottom: 4rem;
