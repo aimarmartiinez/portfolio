@@ -102,7 +102,15 @@ interface Article {
   lead: string;
   paragraphs: string[];
   tags: string[];
+  video?: string;
 }
+
+const articleVideos: Record<string, string> = {
+  padelhub: new URL("./videos/padelhub.mp4", import.meta.url).href,
+  dashboard: new URL("./videos/dashboard.mp4", import.meta.url).href,
+  "web-app-template": new URL("./videos/web-app-template.mp4", import.meta.url).href,
+  "portfolio-DAW": new URL("./videos/portfolio-DAW.mp4", import.meta.url).href,
+};
 
 const articles: Article[] = articlesData;
 const articleGrid = document.querySelector<HTMLDivElement>("#article-grid");
@@ -218,6 +226,23 @@ function renderArticle(article: Article, index: number): HTMLElement {
     createTextElement("p", article.lead, "article-lead"),
   );
 
+  if (article.video) {
+    const videoUrl = articleVideos[article.video];
+
+    if (!videoUrl) {
+      throw new Error(`No se encontró el vídeo del artículo "${article.title}".`);
+    }
+
+    const preview = document.createElement("video");
+    preview.className = "article-preview";
+    preview.src = videoUrl;
+    preview.controls = true;
+    preview.preload = "metadata";
+    preview.playsInline = true;
+    preview.setAttribute("aria-label", `Previsualización del proyecto ${article.title}`);
+    card.append(preview);
+  }
+
   const readButton = createTextElement("button", "Leer artículo", "article-read-button");
   readButton.type = "button";
   readButton.addEventListener("click", () => openArticleDialog(article, index));
@@ -276,10 +301,13 @@ if (!projectPreview) {
 
 const projectPreviewSummary = projectPreview.querySelector("summary");
 const projectPreviewPopup = projectPreview.querySelector<HTMLElement>(".project-preview-popup");
+const projectPreviewVideo = projectPreview.querySelector<HTMLVideoElement>(".project-preview-video");
 
-if (!projectPreviewSummary || !projectPreviewPopup) {
+if (!projectPreviewSummary || !projectPreviewPopup || !projectPreviewVideo) {
   throw new Error("No se encontró el botón o el contenido de la vista previa de PadelHub.");
 }
+
+projectPreviewVideo.src = articleVideos.padelhub;
 
 const preview = projectPreview;
 const previewSummary = projectPreviewSummary;
