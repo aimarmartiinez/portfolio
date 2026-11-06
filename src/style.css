@@ -166,6 +166,11 @@ nav a:hover {
   color: var(--accent);
 }
 
+nav a[aria-current="location"] {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
 nav a:focus-visible,
 header>.toggle-theme-container>button:focus-visible {
   outline: 2px solid var(--accent);
@@ -1092,7 +1097,7 @@ form {
   }
 
   #home {
-    min-height: max(28rem, calc(100svh - var(--header-height) - var(--header-top) - 1rem));
+    min-height: calc(100svh - var(--header-height) - var(--header-top) - 0.75rem);
     align-items: center;
     padding-top: 2rem;
     padding-bottom: 4rem;

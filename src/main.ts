@@ -37,6 +37,53 @@ toggleButton.addEventListener("click", () => {
   applyTheme();
 });
 
+const sectionNavigationLinks = Array.from(
+  document.querySelectorAll<HTMLAnchorElement>('.topbar a[href^="#"]'),
+)
+  .map((link) => ({
+    link,
+    section: document.getElementById(link.hash.slice(1)),
+  }))
+  .filter(
+    (item): item is { link: HTMLAnchorElement; section: HTMLElement } =>
+      item.section !== null,
+  );
+
+if (sectionNavigationLinks.length > 0 && "IntersectionObserver" in window) {
+  const updateActiveNavigationLink = (): void => {
+    const activationPoint = window.innerHeight * 0.4;
+    const activeItem = sectionNavigationLinks.find(({ section }) => {
+      const bounds = section.getBoundingClientRect();
+      return bounds.top <= activationPoint && bounds.bottom > activationPoint;
+    });
+
+    if (!activeItem) {
+      return;
+    }
+
+    for (const { link } of sectionNavigationLinks) {
+      link.removeAttribute("aria-current");
+    }
+
+    activeItem.link.setAttribute("aria-current", "location");
+
+    if (window.location.hash !== activeItem.link.hash) {
+      window.history.replaceState(null, "", activeItem.link.hash);
+    }
+  };
+
+  const sectionObserver = new IntersectionObserver(
+    updateActiveNavigationLink,
+    { rootMargin: "-35% 0px -55% 0px" },
+  );
+
+  for (const { section } of sectionNavigationLinks) {
+    sectionObserver.observe(section);
+  }
+
+  updateActiveNavigationLink();
+}
+
 const contactForm = document.querySelector<HTMLFormElement>("#contact form");
 
 if (!contactForm) {
